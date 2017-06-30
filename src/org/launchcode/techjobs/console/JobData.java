@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.console;
 
+import com.oracle.webservices.internal.api.message.BasePropertySet;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -7,9 +8,11 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -28,6 +31,7 @@ public class JobData {
      * @param field The column to retrieve values from
      * @return List of all of the values of the given field
      */
+
     public static ArrayList<String> findAll(String field) {
 
         // load data, if not already loaded
@@ -76,12 +80,35 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
 
         return jobs;
+    }
+
+    public static ArrayList<HashMap<String, String>> findByValue(String searchString) {
+
+        loadData();
+       ArrayList<HashMap<String, String>> jobList = new ArrayList<>();
+
+        for (HashMap<String, String> row : allJobs) {
+            for (String key : row.keySet()) {
+                /* The following 5 lines were added just for debugging purposes.
+                String row_string = "";
+                row_string = key + ":" + row.get(key);
+                Boolean valueContains = row.get(key).toLowerCase().contains(searchString);
+                String lowerValue = row.get(key).toLowerCase();
+                String lowerSearch = searchString.toLowerCase();
+                */
+                if (row.get(key).toLowerCase().contains(searchString.toLowerCase())) {
+                    jobList.add(row);
+                    break;
+                }
+            }
+        }
+        return jobList;
     }
 
     /**
