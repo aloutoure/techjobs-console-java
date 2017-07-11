@@ -112,6 +112,10 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
+        /* In this method we loop thru the ArrayList that was passed to our method. The way we loop thru it is that
+        * we go thru each row and print the key and the value for that row (one pair per line). Once we've printed out
+        * all the key-value pairs in that row, we print a line separator (******) then print the next row until we've printed
+        * all the rows in someJobs*/
         if (someJobs.size() > 0) {
             for (HashMap<String, String> row : someJobs) {
                 for (String key : row.keySet()) {

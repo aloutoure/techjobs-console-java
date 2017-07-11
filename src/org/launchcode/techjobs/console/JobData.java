@@ -74,6 +74,9 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+        /* This code will loop thru the HashMap allJobs and look for the passed String variable.
+        * The code converts the passed string and the value within a column to lowercase then if a match is found,
+        * that value is added to the jobs ArrayList*/
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
 
         for (HashMap<String, String> row : allJobs) {
